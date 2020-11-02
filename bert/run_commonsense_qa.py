@@ -237,8 +237,8 @@ def example_to_token_ids_segment_ids_label_ids(
     tokenizer):
   """Converts an ``InputExample`` to token ids and segment ids."""
   if ex_index < 5:
-    tf.logging.info(f"*** Example {ex_index} ***")
-    tf.logging.info("qid: %s" % (example.qid))
+    tf.compat.v1.logging.INFO(f"*** Example {ex_index} ***")
+    tf.compat.v1.logging.INFO("qid: %s" % (example.qid))
 
   question_tokens = tokenizer.tokenize(example.question)
   answers_tokens = map(tokenizer.tokenize, example.answers)
@@ -272,18 +272,18 @@ def example_to_token_ids_segment_ids_label_ids(
     segment_ids.append(choice_segment_ids)
 
     if ex_index < 5:
-      tf.logging.info("choice %s" % choice_idx)
-      tf.logging.info("tokens: %s" % " ".join(
+      tf.compat.v1.logging.INFO("choice %s" % choice_idx)
+      tf.compat.v1.logging.INFO("tokens: %s" % " ".join(
         [tokenization.printable_text(t) for t in choice_tokens]))
-      tf.logging.info("token ids: %s" % " ".join(
+      tf.compat.v1.logging.INFO("token ids: %s" % " ".join(
         [str(x) for x in choice_token_ids]))
-      tf.logging.info("segment ids: %s" % " ".join(
+      tf.compat.v1.logging.INFO("segment ids: %s" % " ".join(
         [str(x) for x in choice_segment_ids]))
 
   label_ids = [example.label]
 
   if ex_index < 5:
-    tf.logging.info("label: %s (id = %d)" % (example.label, label_ids[0]))
+    tf.compat.v1.logging.INFO("label: %s (id = %d)" % (example.label, label_ids[0]))
 
   return token_ids, segment_ids, label_ids
 
