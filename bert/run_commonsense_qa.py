@@ -628,7 +628,7 @@ def model_fn_builder(
 
 
 def main(_):
-  tf.logging.set_verbosity(tf.compat.v1.logging.INFO)
+  tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.INFO)
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
     raise ValueError(
