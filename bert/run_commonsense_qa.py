@@ -162,7 +162,9 @@ class DataProcessor(object):
   def _read_jsonl(cls, input_file):
     """Reads a JSON Lines file."""
     with tf.gfile.Open(input_file, "r") as f:
-      return [json.loads(ln) for ln in f]
+        print(input_file)
+        print(f)
+        return [json.loads(ln) for ln in f]
 
 
 class CommonsenseQAProcessor(DataProcessor):
