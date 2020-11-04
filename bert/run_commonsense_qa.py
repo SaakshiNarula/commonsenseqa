@@ -173,9 +173,9 @@ class CommonsenseQAProcessor(DataProcessor):
   SPLITS = ['qtoken', 'rand']
   LABELS = ['A', 'B', 'C', 'D', 'E']
 
-  TRAIN_FILE_NAME = 'train_{split}_split.jsonl'
-  DEV_FILE_NAME = 'dev_{split}_split.jsonl'
-  TEST_FILE_NAME = 'test_{split}_split_no_answers.jsonl'
+  TRAIN_FILE_NAME = 'train_{split}_split.json'
+  DEV_FILE_NAME = 'dev_{split}_split.json'
+  TEST_FILE_NAME = 'test_{split}_split_no_answers.json'
 
   def __init__(self, split):
     if split not in self.SPLITS:
