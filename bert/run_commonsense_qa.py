@@ -239,6 +239,8 @@ def example_to_token_ids_segment_ids_label_ids(
     tokenizer):
   """Converts an ``InputExample`` to token ids and segment ids."""
   if ex_index < 5:
+    print({ex_index})
+    print(ex_index)
     tf.compat.v1.logging.INFO(f"*** Example {ex_index} ***")
     tf.compat.v1.logging.INFO("qid: %s" % (example.qid))
 
