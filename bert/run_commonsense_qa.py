@@ -238,11 +238,11 @@ def example_to_token_ids_segment_ids_label_ids(
     max_seq_length,
     tokenizer):
   """Converts an ``InputExample`` to token ids and segment ids."""
-  if ex_index < 5:
+  """if ex_index < 5:
     print({ex_index})
     print(ex_index)
     tf.compat.v1.logging.INFO("*** Example {%d} ***" %ex_index)
-    tf.compat.v1.logging.INFO("qid: %s" % (example.qid))
+    tf.compat.v1.logging.INFO("qid: %s" % (example.qid))"""
 
   question_tokens = tokenizer.tokenize(example.question)
   answers_tokens = map(tokenizer.tokenize, example.answers)
