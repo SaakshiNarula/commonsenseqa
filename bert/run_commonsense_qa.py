@@ -275,19 +275,19 @@ def example_to_token_ids_segment_ids_label_ids(
     token_ids.append(choice_token_ids)
     segment_ids.append(choice_segment_ids)
 
-    if ex_index < 5:
+    """if ex_index < 5:
       tf.compat.v1.logging.INFO("choice %s" % choice_idx)
       tf.compat.v1.logging.INFO("tokens: %s" % " ".join(
         [tokenization.printable_text(t) for t in choice_tokens]))
       tf.compat.v1.logging.INFO("token ids: %s" % " ".join(
         [str(x) for x in choice_token_ids]))
       tf.compat.v1.logging.INFO("segment ids: %s" % " ".join(
-        [str(x) for x in choice_segment_ids]))
+        [str(x) for x in choice_segment_ids]))"""
 
   label_ids = [example.label]
 
-  if ex_index < 5:
-    tf.compat.v1.logging.INFO("label: %s (id = %d)" % (example.label, label_ids[0]))
+  """if ex_index < 5:
+    tf.compat.v1.logging.INFO("label: %s (id = %d)" % (example.label, label_ids[0]))"""
 
   return token_ids, segment_ids, label_ids
 
@@ -323,10 +323,10 @@ def file_based_convert_examples_to_features(
   for idx, (token_ids, segment_ids, label_ids) in enumerate(
       token_ids_segment_ids_label_ids
   ):
-    if idx % 10000 == 0:
+    """if idx % 10000 == 0:
       tf.compat.v1.logging.INFO("Writing %d of %d" % (
         idx,
-        len(token_ids_segment_ids_label_ids)))
+        len(token_ids_segment_ids_label_ids)))"""
 
     features = collections.OrderedDict()
     for i, (choice_token_ids, choice_segment_ids) in enumerate(
@@ -527,8 +527,8 @@ def model_fn_builder(
     """The `model_fn` for TPUEstimator."""
 
     tf.compat.v1.logging.INFO("*** Features ***")
-    for name in sorted(features.keys()):
-      tf.compat.v1.logging.INFO("  name = %s, shape = %s" % (name, features[name].shape))
+    """for name in sorted(features.keys()):
+      tf.compat.v1.logging.INFO("  name = %s, shape = %s" % (name, features[name].shape))"""
 
     input_ids0 = features["input_ids0"]
     input_mask0 = features["input_mask0"]
@@ -587,13 +587,13 @@ def model_fn_builder(
       else:
         tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
 
-    tf.compat.v1.logging.INFO("**** Trainable Variables ****")
+    """tf.compat.v1.logging.INFO("**** Trainable Variables ****")"""
     for var in tvars:
       init_string = ""
       if var.name in initialized_variable_names:
         init_string = ", *INIT_FROM_CKPT*"
-      tf.compat.v1.logging.INFO("  name = %s, shape = %s%s", var.name, var.shape,
-                      init_string)
+      """tf.compat.v1.logging.INFO("  name = %s, shape = %s%s", var.name, var.shape,
+                      init_string)"""
 
     output_spec = None
     if mode == tf.estimator.ModeKeys.TRAIN:
@@ -632,7 +632,7 @@ def model_fn_builder(
 
 
 def main(_):
-  tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.INFO)
+  """tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.INFO)"""
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
     raise ValueError(
@@ -722,10 +722,10 @@ def main(_):
     eval_seq_length = file_based_convert_examples_to_features(
         eval_examples, label_list, FLAGS.max_seq_length, tokenizer, eval_file)
 
-    tf.compat.v1.logging.INFO("***** Running evaluation *****")
+    """tf.compat.v1.logging.INFO("***** Running evaluation *****")
     tf.compat.v1.logging.INFO("  Num examples = %d", len(eval_examples))
     tf.compat.v1.logging.INFO("  Batch size = %d", FLAGS.eval_batch_size)
-    tf.compat.v1.logging.INFO("  Longest eval sequence = %d", eval_seq_length)
+    tf.compat.v1.logging.INFO("  Longest eval sequence = %d", eval_seq_length)"""
 
     # This tells the estimator to run through the entire set.
     eval_steps = None
@@ -747,9 +747,9 @@ def main(_):
 
     output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
     with tf.gfile.GFile(output_eval_file, "w") as writer:
-      tf.compat.v1.logging.INFO("***** Eval results *****")
+      #tf.compat.v1.logging.INFO("***** Eval results *****")
       for key in sorted(result.keys()):
-        tf.compat.v1.logging.INFO("  %s = %s", key, str(result[key]))
+        #tf.compat.v1.logging.INFO("  %s = %s", key, str(result[key]))
         writer.write("%s = %s\n" % (key, str(result[key])))
 
   if FLAGS.do_predict:
@@ -760,10 +760,10 @@ def main(_):
       FLAGS.max_seq_length, tokenizer,
       predict_file)
 
-    tf.compat.v1.logging.INFO("***** Running prediction*****")
+    """tf.compat.v1.logging.INFO("***** Running prediction*****")
     tf.compat.v1.logging.INFO("  Num examples = %d", len(predict_examples))
     tf.compat.v1.logging.INFO("  Batch size = %d", FLAGS.predict_batch_size)
-    tf.compat.v1.logging.INFO("  Longest predict sequence = %d", predict_seq_length)
+    tf.compat.v1.logging.INFO("  Longest predict sequence = %d", predict_seq_length)"""
 
     if FLAGS.use_tpu:
       # Warning: According to tpu_estimator.py Prediction on TPU is an
