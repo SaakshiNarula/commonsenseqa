@@ -526,7 +526,7 @@ def model_fn_builder(
   def model_fn(features, labels, mode, params):  # pylint: disable=unused-argument
     """The `model_fn` for TPUEstimator."""
 
-    tf.compat.v1.logging.INFO("*** Features ***")
+    #tf.compat.v1.logging.INFO("*** Features ***")
     """for name in sorted(features.keys()):
       tf.compat.v1.logging.INFO("  name = %s, shape = %s" % (name, features[name].shape))"""
 
@@ -704,11 +704,11 @@ def main(_):
     train_file = os.path.join(FLAGS.output_dir, "train.tf_record")
     train_seq_length = file_based_convert_examples_to_features(
         train_examples, label_list, FLAGS.max_seq_length, tokenizer, train_file)
-    tf.compat.v1.logging.INFO("***** Running training *****")
+    """tf.compat.v1.logging.INFO("***** Running training *****")
     tf.compat.v1.logging.INFO("  Num examples = %d", len(train_examples))
     tf.compat.v1.logging.INFO("  Batch size = %d", FLAGS.train_batch_size)
     tf.compat.v1.logging.INFO("  Num steps = %d", num_train_steps)
-    tf.compat.v1.logging.INFO("  Longest training sequence = %d", train_seq_length)
+    tf.compat.v1.logging.INFO("  Longest training sequence = %d", train_seq_length)"""
     train_input_fn = file_based_input_fn_builder(
         input_file=train_file,
         seq_length=FLAGS.max_seq_length,
@@ -783,7 +783,7 @@ def main(_):
       FLAGS.output_dir,
       "test_results.csv")
     with tf.gfile.GFile(test_predictions_file, "w") as writer:
-      tf.compat.v1.logging.INFO("***** Predict results *****")
+      #tf.compat.v1.logging.INFO("***** Predict results *****")
       for example, prediction in zip(predict_examples, result):
         output_line = ",".join([
           str(example.qid),
